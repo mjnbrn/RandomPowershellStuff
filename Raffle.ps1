@@ -37,7 +37,7 @@ while ($Second -eq $First)
     $Second = Get-Random -Maximum $TicketNo
 }
 $Third = Get-Random -Maximum $TicketNo
-while ($Third -eq $First)
+while ($Third -eq $First -or $Third -eq $Second)
 {
     $Third = Get-Random -Maximum $TicketNo
 }
