@@ -2,6 +2,6 @@ $Wordlist = (Invoke-restmethod "https://gist.githubusercontent.com/deekayen/4148
 $Word = Get-Random $Wordlist
 $SearchResults = docker search --limit 100 $word
 $DockerName = (docker search --limit 100 --format "{{json . }}" $word |ConvertFrom-Json |Get-Random  |Select name).name
-while ($DockerName -in (Get-Content .\CrazyDocker.txt)){$DockerName = (docker search --limit 100 --format "{{json . }}" --filter is-automated=true $word |ConvertFrom-Json |Get-Random  |Select name).name}
+while ($DockerName -in (Get-Content .\CrazyDocker.txt -ErrorAction SilentlyContinue)){$DockerName = (docker search --limit 100 --format "{{json . }}" --filter is-automated=true $word |ConvertFrom-Json |Get-Random  |Select name).name}
 docker pull $DockerName
 & docker run $DockerName
